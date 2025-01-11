@@ -53,12 +53,16 @@ fn main() {
         let option: u32 = option.trim().parse().unwrap_or(0); // parse() convert string taken from input into u32(based upon type annotation)
 
         match option {
-            1 => {
+            1 => loop {
                 println!("Enter task: ");
                 let mut task = String::new();
                 io::stdin().read_line(&mut task).unwrap();
+
+                if task.trim().eq_ignore_ascii_case("done") {
+                    break;
+                }
                 todo_list.push(TodoItem::new_task(task.trim()));
-            }
+            },
             2 => {
                 println!("All your tasks");
                 let iter_list = todo_list.iter().enumerate(); // enumerate provide index value
